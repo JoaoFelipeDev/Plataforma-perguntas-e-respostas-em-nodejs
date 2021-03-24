@@ -1,0 +1,23 @@
+{
+  "name": "plataforma-perguntas-e-respostas-em-nodejs",
+  "version": "1.0.0",
+  "description": "Plataforma perguntas e respostas em nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoFelipeDev/Plataforma-perguntas-e-respostas-em-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaoFelipeDev/Plataforma-perguntas-e-respostas-em-nodejs/issues"
+  },
+  "homepage": "https://github.com/JoaoFelipeDev/Plataforma-perguntas-e-respostas-em-nodejs#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  }
+}
