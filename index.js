@@ -4,6 +4,7 @@ const port = 3000;
 const connection = require('./database/database');
 const Pergunta = require('./database/Pergunta');
 const pergunta = require('./database/Pergunta');
+const Resposta = require('./database/Resposta');
 
 //Database
 
@@ -43,17 +44,33 @@ app.get('/perguntar', (req, res)=>{
 app.get('/pergunta/:id', (req, res) => {
     var id = req.params.id;
     Pergunta.findOne({
+        
         where : {id: id}
     }).then(pergunta =>{
         if(pergunta != undefined){
-            res.render('pergunta', {
-                pergunta: pergunta
-            });
+
+            Resposta.findAll({
+                where: {perguntaId: pergunta.id},
+                order:[
+                    ['id','DESC'] //ASC = Crescente .. DESC = decrescente
+                ]
+            }).then(respostas =>{
+
+                res.render('pergunta', {
+                    pergunta: pergunta,
+                    respostas: respostas,
+                });
+
+            })
+
+
+            
         }else{
             res.redirect('/')
         }
     })
 })
+
 
 app.post('/salvarpergunta',(req, res)=>{
     var titulo = req.body.titulo;
@@ -69,4 +86,15 @@ app.post('/salvarpergunta',(req, res)=>{
     })
 
 });
+
+app.post('/responder', function (req, res) {
+    var corpo = req.body.corpo;
+    var perguntaID = req.body.pergunta;
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaID,
+    }).then(()=>{
+        res.redirect('/pergunta/'+perguntaID);
+    });
+})
 app.listen(port, () => console.log(`Example app listening on port port!`))
