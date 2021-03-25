@@ -3,21 +3,9 @@ const app = express();
 const port = 3000;
 const connection = require('./database/database');
 const Pergunta = require('./database/Pergunta');
-const pergunta = require('./database/Pergunta');
 const Resposta = require('./database/Resposta');
 
-//Database
 
-connection
-.authenticate()
-.then(
-    ()=>{
-        console.log("conectado o db");
-    }
-)
-.catch((msErro)=>{
-    console.log("Deu ruim "+msErro);
-})
 
 // Estou dizendo para o Express usar o EJS como View engine
 app.set('view engine', 'ejs');
